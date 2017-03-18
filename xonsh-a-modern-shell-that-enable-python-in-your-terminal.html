@@ -1,0 +1,325 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <link rel="shortcut icon" href="https://william-droz.com/images/favicon.png" />
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="William Droz" />
+        <title>Xonsh – A modern shell that enable python in your terminal</title>
+        
+<meta name="description" content="&lt;p&gt;Xonsh – A modern shell that enable python in your terminal&lt;/p&gt;
+&lt;p&gt;Maybe once a month/year you have to write a bash script. Certainly less trivial of this one&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;#! /bin/bash&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt;
+        &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;hello &lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$USER&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It’s just answer hello back to the user. Let’s try …&lt;/p&gt;" />
+
+        <!--[if !IE 7]>
+        <style type="text/css">
+            #main-content {display:table;height:100%}
+        </style>
+        <![endif]-->
+        <link rel="stylesheet" href="https://william-droz.com/theme/css/backdrop.css" />
+        <link rel="stylesheet" href="https://william-droz.com/theme/css/pygments.css" />
+        <script src="https://william-droz.com/theme/js/modernizr.js"></script>
+
+
+        <script type="text/javascript">
+            var disqus_shortname = 'william-droz-com'; 
+
+            (function () {
+                var s = document.createElement('script'); s.async = true;
+                s.type = 'text/javascript';
+                s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+            }());
+        </script>
+    </head>
+      
+
+    <body>
+        <div class="master-row">
+
+            <div class="content-pane main-content">
+                <nav class="top-bar" data-topbar role="navigation">
+                    <ul class="title-area">
+                        <li class="name"><!-- Leave this empty --></li>
+                        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+                    </ul>
+                    <section class="top-bar-section">
+                        <ul class="left">
+                        </ul>
+                        <ul class="right">
+                            <li><a href="https://william-droz.com/category/me.html">Me</a></li>
+                            <li class="active"><a href="https://william-droz.com/category/python-bash.html">python bash</a></li>
+                        </ul>
+                    </section>
+                </nav>
+
+                <div class="row title-bar">
+                    <div class="small-12 columns">
+                        <h1><a href="https://william-droz.com">William Droz -- blog</a></h1><h2> <small>Having fun with cutting-edge technologies</small></h2>
+                        <hr>
+                    </div>
+                </div>
+            
+                <div id="contents">
+<div class="row">
+    <div class="small-12 columns article">
+        <h2>Xonsh – A modern shell that enable python in your terminal</h2>
+        <div class="row info-bar" style="margin-left:0rem;margin-bottom:6px;">
+    <div class="small-12 columns">
+        <ul class="inline-list">
+            <li><span><i class="fa fa-calendar"></i>&nbsp; Sat 18 March 2017</span></li>
+            <li><span><i class="fa fa-folder-open"></i>&nbsp; <a href="https://william-droz.com/category/python-bash.html">python bash</a></span></li>
+            <li><span><i class="fa fa-comments"></i>&nbsp; <a href="https://william-droz.com/xonsh-a-modern-shell-that-enable-python-in-your-terminal.html#disqus_thread" rel="bookmark" title="Disqus Comments">Xonsh – A modern shell that enable python in your terminal</a></span></li>
+        </ul>
+    </div>
+</div>
+        <section class="article">
+            <p>Xonsh – A modern shell that enable python in your terminal</p>
+<p>Maybe once a month/year you have to write a bash script. Certainly less trivial of this one</p>
+<div class="highlight"><pre><span></span><span class="ch">#! /bin/bash</span>
+<span class="k">if</span> <span class="o">[</span><span class="nv">$1</span> <span class="o">==</span> <span class="s2">&quot;hello&quot;</span><span class="o">]</span>
+    <span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&quot;hello </span><span class="nv">$USER</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+</pre></div>
+
+
+<p>It’s just answer hello back to the user. Let’s try to run it</p>
+<div class="highlight"><pre><span></span>droz@devtuxhome:~/tests_sanbox$ bash script.sh hello
+script.sh: line <span class="m">2</span>: <span class="o">[</span>hello: <span class="nb">command</span> not found
+</pre></div>
+
+
+<p>Argh, doesn’t work ! Why ? Because I forget to put spaces after ‘[‘ and before ‘]’… what year is it ? 1999 ?</p>
+<p>Let’s try xonsh !</p>
+<h2>First step with xonsh</h2>
+<div class="highlight"><pre><span></span>sudo pip3 install –upgrade xonsh
+</pre></div>
+
+
+<p>now you can use xonsh. But before playing with it, I recommend to run the wizard.</p>
+<div class="highlight"><pre><span></span>xonsh
+xondif wizard
+</pre></div>
+
+
+<p>Answer the wizard according to your needs. Now let’s make few commands</p>
+<div class="highlight"><pre><span></span>droz@devtuxhome ~/tests_sanbox $ <span class="k">for</span> i in range<span class="o">(</span><span class="m">10</span><span class="o">)</span>:
+................................     <span class="nb">echo</span> @<span class="o">(</span>i<span class="o">)</span> &gt; @<span class="o">(</span><span class="s1">&#39;file_{}.txt&#39;</span>.format<span class="o">(</span>i<span class="o">))</span>
+................................     
+................................ 
+droz@devtuxhome ~/tests_sanbox $ cat *.txt
+<span class="m">0</span>
+<span class="m">1</span>
+<span class="m">2</span>
+<span class="m">3</span>
+<span class="m">4</span>
+5http://xon.sh/tutorial.html
+<span class="m">6</span>
+<span class="m">7</span>
+<span class="m">8</span>
+<span class="m">9</span>
+droz@devtuxhome ~/tests_sanbox $ ls *.txt
+file_0.txt  file_1.txt  file_2.txt  file_3.txt  file_4.txt  file_5.txt  file_6.txt  file_7.txt  file_8.txt  file_9.txt
+droz@devtuxhome ~/tests_sanbox $
+</pre></div>
+
+
+<p>Yes, I just created 10 files, with index both in name and inside the file. Yes, I just combined both python and bash in the same snippet.</p>
+<p>If you want a better preview, you can look at the official tutorial : http://xon.sh/tutorial.html</p>
+<h2>Want a more customized prompt ? Challenge accepted</h2>
+<p>Let’s make more stuff in the prompt! Why not current time and latest story from Hacker News ?</p>
+<p><img alt="Results prompt" src="https://william-droz.com/images/prompt_hn.png"></p>
+<p>How ? Just edit <code>~/.xonshrc</code> and put this</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="n">LATEST_NEWS</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="err">$</span><span class="n">XONSH_SHOW_TRACEBACK</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">DEFAULT_PROMPT</span> <span class="o">=</span> <span class="s1">&#39;{BOLD_GREEN}{user}@{hostname} {BOLD_RED}</span><span class="si">%s</span><span class="s1">{BOLD_CYAN}{cwd}{BOLD_CYAN} {prompt_end}{NO_COLOR}&#39;</span>
+
+<span class="k">def</span> <span class="nf">ask_hn</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">LATEST_NEWS</span>
+    <span class="k">while</span><span class="p">(</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">hn</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://news.ycombinator.com/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">hn</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+        <span class="n">last_story</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;storylink&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">LATEST_NEWS</span> <span class="o">=</span> <span class="n">last_story</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">ask_hn</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">update_prompt</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; {BOLD_YELLOW}</span><span class="si">%s</span><span class="s1">{NO_COLOR} &lt;&lt;&lt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">LATEST_NEWS</span><span class="p">)</span> <span class="o">+</span> <span class="n">DEFAULT_PROMPT</span> <span class="o">%</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot; [%H:%M:%S] &quot;</span><span class="p">)</span>
+
+<span class="err">$</span><span class="n">PROMPT</span> <span class="o">=</span> <span class="n">update_prompt</span>
+</pre></div>
+
+
+<p>Remember to <code>exit</code> and type <code>xonsh</code> again.</p>
+<p>Basically, you have to put in <code>$PROMPT</code> a function that create the prompt. This function will be called EACH TIME you type something in your shell. That why I create a thread that cache the latest news for 10 sec.</p>
+<p>I know, it’s a little bit overkill, but it’s works !</p>
+<h2>Final step, put xonsh as your default shell</h2>
+<p>check where is your xonsh</p>
+<div class="highlight"><pre><span></span>which xonsh
+</pre></div>
+
+
+<p>Add it to the shells list</p>
+<div class="highlight"><pre><span></span>sudo vim /etc/shells
+</pre></div>
+
+
+<p>Finally we change change the shell (need logout and login for take effect)</p>
+<div class="highlight"><pre><span></span>chsh -s <span class="k">$(</span>which xonsh<span class="k">)</span>
+</pre></div>
+
+
+<p>I hope you had appreciate this little introduction to xonsh. But by careful if you want to use it in production! I only show the good parts ! There are things your should check, like setup environment variables.</p>    
+        </section>
+        <hr>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = "william-droz-com"; // required: replace example with your forum shortname
+            var disqus_identifier = "xonsh-–-a-modern-shell-that-enable-python-in-your-terminal";
+            var disqus_url = "https://william-droz.com/xonsh-a-modern-shell-that-enable-python-in-your-terminal.html";
+            var disqus_title = "Xonsh – A modern shell that enable python in your terminal";
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+</div>
+                </div>
+
+                <footer class="show-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="https://william-droz.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="https://william-droz.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="https://william-droz.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy; 2016 William Droz 
+                <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>                </footer>
+            </div>
+            
+            <div class="image-pane main-content" style="background: url('https://william-droz.com/images/left.png'); background-size:cover; background-position: right;">
+                <div class="row">
+                    <div class="small-12 medium-4 large-12 columns">
+                        <h5 class='text-center'>About</h5>
+                        <div class="about-me">
+                            <div class="hide-for-medium-only small-3 columns no-buffer">
+                                <a class="th" href="https://william-droz.com/images/face.jpg">
+                                    <img src="https://william-droz.com/images/face.jpg">
+                                </a>
+                            </div>
+                            <div class="small-9 medium-12 large-9 columns text-justify">
+                                I’ve been programming since 2004 and I got my master degree in software engineering in 2015. Currently I’m working as a research assistant at “He-arc Ingénierie”. 
+With my work, I have the opportunity to play with some cutting edge technologies, like Tensorflow, Keras and Spark. I plan to be able to write “deep learning” on my resume before the end of 2017.
+                            </div>
+                            <div class="small-12 columns">
+                                <ul class="inline-center social-list">
+                                    <li><a href="mailto:william.droz.ch@gmail.com"><i class="fa fa-envelope"></i>&nbsp; Email</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="small-12 medium-4  large-12 columns link-list">
+                        <h5 class='text-center'>Links</h5>
+                        <ul class="inline-center">
+                            <li><a href="https://tome.one/">Blog of amietn</a></li>
+                        </ul>
+                    </div>
+
+<!--
+                    <div class="small-12 medium-3 large-12 columns">
+                    </div>
+-->
+               </div>
+            </div>
+        </div>
+        
+        
+        <div class="row">
+            <footer class="hide-for-large-up">
+<div class="row">
+    <div class="small-6 medium-3 columns">
+        <ul class="left-nav">
+            <li><a href="https://william-droz.com">Home &nbsp;<i class="fa fa-home fa-fw"></i></a></li>
+            <li><a href="https://william-droz.com/categories.html">Categories &nbsp;<i class="fa fa-folder-open fa-fw"></i></a></li>
+        </ul>
+    </div>
+    <div class="small-6 medium-3 medium-push-6 columns">
+        <ul class="right-nav">
+            <li><a href="https://william-droz.com/archives.html"><i class="fa fa-archive fa-fw"></i>&nbsp; Archives</a></li>
+        </ul>
+    </div>
+    <div class="small-12 medium-6 medium-pull-3 columns text-center">
+    </div>
+    <div class="small-12 columns sub-footer">
+        <hr>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-left">
+                &copy; 2016 William Droz 
+                <!-- <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="cc.png" /></a>-->
+            </p>
+        </div>
+        <div class="small-12 medium-6 columns">
+            <p class="small-text-center medium-text-right">
+                Proudly powered by <a href="http://blog.getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="https://www.python.org/">Python</a>.
+            </p>
+        </div>
+    </div>
+</div>            </footer>
+        </div>
+        
+        
+        <script src="https://william-droz.com/theme/js/jquery.min.js"></script>
+        <script src="https://william-droz.com/theme/js/foundation.min.js"></script>
+        <script src="https://william-droz.com/theme/js/app.js"></script>
+    </body>
+  
+</html>
