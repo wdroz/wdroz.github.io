@@ -99,7 +99,7 @@ script.sh: line <span class="m">2</span>: <span class="o">[</span>hello: <span c
 </pre></div>
 
 
-<p>Argh, doesn’t work ! Why ? Because I forget to put spaces after ‘[‘ and before ‘]’… what year is it ? 1999 ?</p>
+<p>Argh, doesn’t work ! Why ? Because I forgot to put spaces after ‘[‘ and before ‘]’… what year is it ? 1999 ?</p>
 <p>Let’s try xonsh !</p>
 <h2>First step with xonsh</h2>
 <div class="highlight"><pre><span></span>sudo pip3 install –upgrade xonsh
@@ -112,7 +112,7 @@ xondif wizard
 </pre></div>
 
 
-<p>Answer the wizard according to your needs. Now let’s make few commands</p>
+<p>Answer the wizard according to your needs. Now let’s make some commands</p>
 <div class="highlight"><pre><span></span>droz@devtuxhome ~/tests_sanbox $ <span class="k">for</span> i in range<span class="o">(</span><span class="m">10</span><span class="o">)</span>:
 ................................     <span class="nb">echo</span> @<span class="o">(</span>i<span class="o">)</span> &gt; @<span class="o">(</span><span class="s1">&#39;file_{}.txt&#39;</span>.format<span class="o">(</span>i<span class="o">))</span>
 ................................     
@@ -137,9 +137,9 @@ droz@devtuxhome ~/tests_sanbox $
 <p>Yes, I just created 10 files, with index both in name and inside the file. Yes, I just combined both python and bash in the same snippet.</p>
 <p>If you want a better preview, you can look at the official tutorial : http://xon.sh/tutorial.html</p>
 <h2>Want a more customized prompt ? Challenge accepted</h2>
-<p>Let’s make more stuff in the prompt! Why not current time and latest story from Hacker News ?</p>
+<p>Let’s make more stuff in the prompt! Why not the current time and the latest story from Hacker News ?</p>
 <p><img alt="Results prompt" src="https://william-droz.com/images/prompt_hn.png"></p>
-<p><br /></p>
+<p><br /><br /></p>
 <p>How ? Just edit <code>~/.xonshrc</code> and put this</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">import</span> <span class="nn">requests</span>
@@ -183,12 +183,12 @@ droz@devtuxhome ~/tests_sanbox $
 </pre></div>
 
 
-<p>Finally we change change the shell (need logout and login for take effect)</p>
+<p>Finally we can change the default shell (need logout and login for take effect)</p>
 <div class="highlight"><pre><span></span>chsh -s <span class="k">$(</span>which xonsh<span class="k">)</span>
 </pre></div>
 
 
-<p>I hope you had appreciate this little introduction to xonsh. But by careful if you want to use it in production! I only show the good parts ! There are things your should check, like setup environment variables.</p>    
+<p>I hope you had appreciate this little introduction to xonsh. But by careful if you want to use it in production! I only shown the good parts ! There are things your should check, like setup environment variables.</p>    
         </section>
         <hr>
         <div id="disqus_thread"></div>
