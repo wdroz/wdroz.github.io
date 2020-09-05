@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://127.0.0.1:1111/</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:1111/about/</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:1111/blog/new-blog/</loc>
+        <lastmod>2020-08-31</lastmod>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:1111/categories/</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:1111/categories/docs/</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:1111/categories/writing-post/</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:1111/tags/</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:1111/tags/blog/</loc>
+    </url>
+</urlset>
