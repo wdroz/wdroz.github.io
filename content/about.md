@@ -25,6 +25,15 @@ I'm currently toying with Rust for my new projects, and I really like this langu
 
 [noabspath](https://github.com/wdroz/noabspath) *Detect hard-coded absolute paths in your codebases*. I created this project because I work with people who like to write absolute paths everywhere and unfortunately they rarely ship their computer with their code. This project is written in Rust.
 
+### 📋 Works projects:
+
+[WeNet](https://www.internetofus.eu/)
+
+*The main goal of WeNet is to develop the culture, science and engineering methodologies, algorithms, social interaction protocols for an online platform that will empower machine mediated diversity-aware interactions between people.*
+
+  * [personal-context-builder](https://github.com/InternetOfUs/personal-context-builder)
+  * [realtime](https://github.com/InternetOfUs/realtime)
+
 ### ⛔️ Old projects and/or student projects
 
 All my other projects not mentionned before are trash, but I don't want to delete them. *please don't explore my garbage.*
