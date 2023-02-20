@@ -1,0 +1,3 @@
+[submodule "codinfox-zola"]
+	path = themes/codinfox-zola
+	url = git@github.com:svavs/codinfox-zola.git
